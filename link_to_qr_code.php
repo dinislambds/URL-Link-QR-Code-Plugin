@@ -23,9 +23,11 @@ function wordcount_plugin_textdomain(){
 add_action("plugins_loaded","wordcount_plugin_textdomain");
 
 function link_to_qr_callback( $content ){
+
+    // Current Post ID
     $post_id = get_the_ID();
     $post_title = get_the_title( $post_id );
-    $post_url = get_the_permalink( $post_id );
+    $post_url = rlencode(get_the_permalink( $post_id ));
     $image_source = sprintf( "https://api.qrserver.com/v1/create-qr-code/?size=185x185&ecc=L&qzone=1&data=%s", $post_url );
     $content .= sprintf( "<div class='qrcode_img'><img src='%s' alt='%s'></div>", $image_source, $post_title );
 
