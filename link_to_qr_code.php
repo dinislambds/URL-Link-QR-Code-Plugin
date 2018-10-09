@@ -24,11 +24,24 @@ add_action("plugins_loaded","wordcount_plugin_textdomain");
 
 function link_to_qr_callback( $content ){
 
-    // Current Post ID
+    // Current Post ID, title, permalink/URL
     $post_id = get_the_ID();
     $post_title = get_the_title( $post_id );
-    $post_url = rlencode(get_the_permalink( $post_id ));
-    $image_source = sprintf( "https://api.qrserver.com/v1/create-qr-code/?size=185x185&ecc=L&qzone=1&data=%s", $post_url );
+    $post_url = urlencode(get_the_permalink( $post_id ));
+
+    // Current post type
+    $post_type = get_post_type( $post_id );
+
+    // Post type check
+    $exclude_post_type = apply_filters( "url_to_qrcode_exclude_post_types", array() );
+    if ( in_array ( $exclude_post_type, $post_type ) ) {
+        return $content;
+    }
+
+    // Diemntions of the QR image
+    $image_size = apply_filters( "url_to_qrcode_image_size", "200x200" );
+
+    $image_source = sprintf( "https://api.qrserver.com/v1/create-qr-code/?size=%s&ecc=L&qzone=1&data=%s", $image_size, $post_url );
     $content .= sprintf( "<div class='qrcode_img'><img src='%s' alt='%s'></div>", $image_source, $post_title );
 
     return $content;
