@@ -34,7 +34,7 @@ function link_to_qr_callback( $content ){
 
     // Post type check
     $exclude_post_type = apply_filters( "url_to_qrcode_exclude_post_types", array() );
-    if ( in_array ( $exclude_post_type, $post_type ) ) {
+    if ( in_array ( $post_type, $exclude_post_type ) ) {
         return $content;
     }
 
