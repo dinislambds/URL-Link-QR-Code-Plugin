@@ -39,7 +39,7 @@ function link_to_qr_callback( $content ){
     }
 
     // Diemntions of the QR image
-    $image_size = apply_filters( "url_to_qrcode_image_size", "200x200" );
+    $image_size = apply_filters( "url_to_qrcode_image_size", "400x400" );
 
     $image_source = sprintf( "https://api.qrserver.com/v1/create-qr-code/?size=%s&ecc=L&qzone=1&data=%s", $image_size, $post_url );
     $content .= sprintf( "<div class='qrcode_img'><img src='%s' alt='%s'></div>", $image_source, $post_title );
