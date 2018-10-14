@@ -11,7 +11,9 @@ Text Domain: link-to-qrcode
 Domain Path: /languages/
  */
 
-/* function wordcount_plugin_activation(){}
+/* 
+// Activation/Deactivation register
+function wordcount_plugin_activation(){}
 register_activation_hook( __FILE__, "wordcount_plugin_activation" );
 
 function wordcount_plugin_deactivation(){}
